@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'loady'
+
+args = Loady::Args.parse
+cmd = Loady::Command.new(args)
+cmd.run
