@@ -14,38 +14,40 @@ module Loady
       end
     end
 
-    def max_time
-      @data[31]
+    def total_times
+      field = find_field("Total:          ")
+      field.split(" ")
     end
 
-    def avg_time
-      @data[31]
+    def max_total_time
+      total_times[5].to_i
     end
 
-    def min_time
-      @data[31]
+    def mean_total_time
+      total_times[2].to_i
     end
 
     def ninty_five
-      begin
-        @data[39].split(" ").last
-      rescue
-        0
-      end
-      #@data[39]
+      field = find_field("  95%      ")
+      field.split(" ").last.to_i if field
     end
 
     def rps
-      begin
-        @data[21].match(/[\d\.]+/)[0].to_f
-      rescue Exception => e
-        p e
-        p @data[21]
-      end
+      field = find_field("Requests per second:")
+      field.match(/[\d\.]+/)[0].to_f
     end
 
     def to_s
       @data.to_s
+    end
+
+    def find_field(name)
+      @data.each do |item|
+        if item.start_with? name
+          return item
+        end
+      end
+      nil
     end
   end
 end

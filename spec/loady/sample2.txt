@@ -30,7 +30,7 @@ Connection Times (ms)
 Connect:        0    0   0.1      0       0
 Processing:     0    0   0.1      0       0
 Waiting:        0    0   0.0      0       0
-Total:          0    0   0.2      0       0
+Total:          0    33   0.2      0       88
 
 Percentage of the requests served within a certain time (ms)
   50%      0
@@ -38,7 +38,7 @@ Percentage of the requests served within a certain time (ms)
   75%      0
   80%      0
   90%      0
-  95%      0
+  95%      123
   98%      0
   99%      0
  100%      0 (longest request)

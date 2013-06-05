@@ -6,6 +6,13 @@ describe Loady::Result do
     @result2 = Loady::Result.new(File.read("spec/loady/sample2.txt"))
   end
 
-  it { @result1.rps.should eql(169.0) }
-  it { @result2.rps.should eql(338.0) }
+  it { @result1.rps.should eql(4166.67) }
+  it { @result1.ninty_five.should eql(nil) }
+  it { @result1.mean_total_time.should eql(44) }
+  it { @result1.max_total_time.should eql(55) }
+
+  it { @result2.rps.should eql(3164.56) }
+  it { @result2.ninty_five.should eql(123) }
+  it { @result2.mean_total_time.should eql(33) }
+  it { @result2.max_total_time.should eql(88) }
 end

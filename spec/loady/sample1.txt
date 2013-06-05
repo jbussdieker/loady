@@ -30,4 +30,4 @@ Connection Times (ms)
 Connect:        0    0   0.0      0       0
 Processing:     0    0   0.0      0       0
 Waiting:        0    0   0.0      0       0
-Total:          0    0   0.0      0       0
+Total:          0    44   0.0      0       55
