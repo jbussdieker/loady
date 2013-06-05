@@ -15,8 +15,8 @@ module Loady
       plot_data = []
 
       while !results.errors? do
-        plot_data << "#{concurrency}\t#{results.rps}\t#{results.max_time}\t#{results.ninty_five}"
-        puts "#{concurrency}\t#{results.rps}\t#{results.max_time}\t#{results.ninty_five}"
+        plot_data << "#{concurrency}\t#{results.rps}\t#{results.mean_total_time}\t#{results.ninty_five}"
+        puts "#{concurrency}\t#{results.rps}\t#{results.mean_total_time}\t#{results.ninty_five}"
 
         if concurrency < 10
           concurrency += 1
@@ -31,9 +31,9 @@ module Loady
         results = Result.new(data)
       end
 
-      File.open("plot_data", "w") {|f| f.write(plot_data.join("\n"))}
+      File.open("data/plot_data", "w") {|f| f.write(plot_data.join("\n"))}
 
-      puts `gnuplot plot`
+      puts `gnuplot data/plot_script`
     end
   end
 end
