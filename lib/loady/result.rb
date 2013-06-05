@@ -15,7 +15,7 @@ module Loady
     end
 
     def total_times
-      field = find_field("Total:          ")
+      field = find_field("Total:")
       field.split(" ")
     end
 
@@ -28,7 +28,7 @@ module Loady
     end
 
     def ninty_five
-      field = find_field("  95%      ")
+      field = find_field("  95%")
       field.split(" ").last.to_i if field
     end
 

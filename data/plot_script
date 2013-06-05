@@ -1,28 +1,30 @@
 reset
 
-set term png
-set output "chart.png"
+set term png size 960,480
+set output "data/chart.png"
 
 #unset key
-tm = 0.92
+tm = 0.90
 bm = 0.10
 lm = 0.10
-rm = 0.92
+rm = 0.90
 
-set xtics nomirror
 set ytics nomirror
+
 set tmargin at screen tm
 set lmargin at screen lm
 set rmargin at screen rm
 set bmargin at screen bm
 
+set xrange [1:*]
+
 set multiplot
 
-
 set key left above
-plot "plot_data" using 1:6 title "Mean" with lines ls 3, \
-     "plot_data" using 1:10 title "95%" with lines ls 7
+plot "data/plot_data" using 1:2 title "RPS" smooth bezier ls 1
+
 set key right above
 set ytics format ""
 set y2tics
-plot "plot_data" using 1:2 title "RPS" smooth bezier ls 1
+plot "data/plot_data" using 1:3 title "Mean" smooth bezier ls 3, \
+     "data/plot_data" using 1:4 title "95%" smooth bezier ls 7

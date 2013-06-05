@@ -8,14 +8,14 @@ module Loady
       site = @args[:url]
       puts "Starting test..."
       concurrency = 1
-      count = 1
+      count = 5
       data = `ab -n #{count} -c #{concurrency} #{site}`
       results = Result.new(data)
 
-      plot_data = []
+      @plot_data = []
 
       while !results.errors? do
-        plot_data << "#{concurrency}\t#{results.rps}\t#{results.mean_total_time}\t#{results.ninty_five}"
+        @plot_data << "#{concurrency}\t#{results.rps}\t#{results.mean_total_time}\t#{results.ninty_five}"
         puts "#{concurrency}\t#{results.rps}\t#{results.mean_total_time}\t#{results.ninty_five}"
 
         if concurrency < 10
@@ -29,10 +29,13 @@ module Loady
         count = (5 * results.rps).to_i
         data = `ab -n #{count} -c #{concurrency} #{site}`
         results = Result.new(data)
+
+        plot
       end
+    end
 
-      File.open("data/plot_data", "w") {|f| f.write(plot_data.join("\n"))}
-
+    def plot
+      File.open("data/plot_data", "w") {|f| f.write(@plot_data.join("\n"))}
       puts `gnuplot data/plot_script`
     end
   end
