@@ -4,13 +4,23 @@ module Loady
       @args = args
     end
 
-    def run
+    def ab(count, concurrency)
       site = @args[:url]
+      if @args[:header]
+        cmd = "ab -n #{count} -c #{concurrency} -H \"#{@args[:header]}\" #{site}"
+      else
+        cmd = "ab -n #{count} -c #{concurrency} #{site}"
+      end
+      data = `#{cmd}`
+      results = Result.new(data)
+      results
+    end
+
+    def run
       puts "Starting test..."
       concurrency = 1
       count = 5
-      data = `ab -n #{count} -c #{concurrency} #{site}`
-      results = Result.new(data)
+      results = ab(count, concurrency)
 
       @plot_data = []
 
@@ -27,8 +37,7 @@ module Loady
         end
 
         count = (5 * results.rps).to_i
-        data = `ab -n #{count} -c #{concurrency} #{site}`
-        results = Result.new(data)
+        results = ab(count, concurrency)
 
         plot
       end

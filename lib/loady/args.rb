@@ -1,7 +1,9 @@
 module Loady
   class Args
     def self.parse
-      {:url => ARGV[0]}
+      args = {:url => ARGV[0]}
+      args.merge!({:header => ARGV[1]}) if ARGV[1]
+      args
     end
   end
 end
